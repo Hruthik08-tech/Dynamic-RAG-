@@ -1,0 +1,234 @@
+:root {
+  --color-bg: #f9f9f9; /* Off-White: Main background */
+  --color-surface: #e5e5e5; /* Medium Gray: Bot message bubbles / sidebars */
+  --color-surface-dark: #d1d1d1; /* Slightly Darker: Sidebar */
+  --color-accent: #007bff; /* Ocean Blue: User bubbles & Primary */
+  --color-highlight: #28a745; /* Success Green: Send button & Focus */
+  --color-text: #212529; /* Dark Gray: Primary text */
+}
+
+.cyber-chat-layout {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  overflow: auto;
+}
+
+/* --- Sidebar --- */
+.cyber-sidebar {
+  width: 260px;
+  background-color: var(--color-surface-dark);
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 1rem; /* Increased vertical padding */
+  /* Removed strong border for a softer look */
+  /* border-right: 1px solid rgba(0, 0, 0, 0.1); */
+}
+
+.new-chat-btn {
+  padding: 12px 10px; /* Slightly larger clickable area */
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  text-align: left;
+  font-size: 0.95rem;
+  color: var(--color-text);
+  margin-bottom: 1rem; /* Added space below the button */
+  background-color: #ffffff; /* Use white background for clarity */
+}
+
+.new-chat-btn:hover {
+  background-color: var(--color-bg); /* Match main background on hover */
+}
+
+.history-section {
+  flex: 1;
+  margin-top: 1rem; /* Adjusted margin */
+  overflow-y: auto;
+}
+
+.history-label {
+  font-size: 0.75rem;
+  color: rgba(0, 0, 0, 0.5);
+  margin-bottom: 0.75rem; /* More space for hierarchy */
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.history-item {
+  padding: 10px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  border-radius: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 5px; /* Small gap between items */
+}
+
+.history-item:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* --- Main Chat Area --- */
+.cyber-chat-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background-color: var(--color-bg);
+}
+
+.chat-window {
+  flex: 1;
+  padding: 2.5rem 2rem; /* Increased overall chat padding */
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* Reduced gap for a tighter flow */
+  width: 100%;
+}
+
+/* Messages */
+.message-bubble {
+  max-width: 720px;
+  width: fit-content;
+  padding: 12px 18px;
+  border-radius: 16px;
+  font-size: 1rem;
+  line-height: 1.45;
+}
+
+.message-bubble.user {
+  background-color: #007bff;
+  color: #ffffff;
+  border-radius: 16px 16px 4px 16px;
+}
+
+.message-bubble.bot {
+  background-color: #f0f0f0;
+  color: var(--color-text);
+  border-radius: 16px 16px 16px 4px;
+}
+
+.message-row {
+  display: flex;
+  width: 100%;
+}
+
+/* User messages → right */
+.user-row {
+  justify-content: flex-end;
+}
+
+/* Bot messages → left */
+.bot-row {
+  justify-content: flex-start;
+}
+
+/* --- Input Area --- */
+.input-container {
+  padding: 1.5rem 2rem; /* Reduced padding slightly */
+  width: 100%;
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+.input-wrapper {
+  position: relative;
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 10px;
+  display: flex;
+  align-items: flex-end;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* Softer shadow */
+}
+
+.input-wrapper:focus-within {
+  border-color: var(--color-accent);
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2); /* Accent color glow on focus */
+}
+
+textarea {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--color-text);
+  resize: none;
+  font-family: inherit;
+  padding: 8px;
+  outline: none;
+
+  /* Auto expand behavior */
+  min-height: 24px;
+  max-height: 140px; /* expansion limit */
+  overflow-y: auto;
+
+  line-height: 1.4;
+}
+
+.send-btn {
+  background: var(--color-highlight);
+  border: none;
+  border-radius: 8px;
+  width: 34px; /* Slightly larger button */
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: white;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.send-btn:hover {
+  transform: translateY(-1px); /* Slight lift instead of scale */
+  background-color: #218838; /* Darker green on hover */
+}
+
+.disclaimer {
+  text-align: center;
+  font-size: 0.75rem;
+  color: rgba(0, 0, 0, 0.4);
+  margin-top: 10px;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.25) transparent;
+}
+
+/* Webkit browsers (Chrome, Edge, Safari) */
+*::-webkit-scrollbar {
+  width: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  transition: background-color 0.2s ease;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.chat-window {
+  scroll-behavior: smooth;
+}
