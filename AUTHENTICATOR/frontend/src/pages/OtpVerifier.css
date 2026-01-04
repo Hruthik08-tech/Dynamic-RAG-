@@ -1,0 +1,207 @@
+:root {
+  /* Strict Palette Mapping */
+  --color-bg: #060c06;           /* Deepest Black-Green */
+  --color-surface: #1e1e1e;      /* Dark Gray */
+  --color-accent: #54c750;       /* Vibrant Neon Green */
+  --color-text: #f0f2f0;         /* Off-White */
+  
+  /* New Variables for the Cyber Look */
+  --color-input-bg: #0a0f0a;     /* Almost black for inputs */
+  --color-border-subtle: rgba(84, 199, 80, 0.3); /* Subtle green border */
+  --shadow-accent-glow: 0 0 25px rgba(84, 199, 80, 0.25);
+  --anim-speed: 0.4s;
+}
+
+/* Container Layout - Keeps your Vanta background visible */
+.fintech-otp-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  /* Background color is a fallback; Vanta canvas sits on top */
+  background-color: var(--color-bg);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  padding: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+/* --- THE RE-IMAGINED CARD --- */
+.fintech-otp-card {
+  /* Dark surface to blend with the theme */
+  background-color: rgba(30, 30, 30, 0.95); /* Slight transparency */
+  backdrop-filter: blur(10px); /* frosted glass effect */
+  padding: 45px;
+  border-radius: 20px;
+  
+  /* Green glowing border and shadow */
+  border: 1px solid var(--color-border-subtle);
+  box-shadow: var(--shadow-accent-glow), 0 10px 30px rgba(0,0,0,0.5);
+  
+  width: 100%;
+  max-width: 460px;
+  text-align: center;
+  
+  /* Smoother Entry Animation */
+  animation: cyberSlideUp var(--anim-speed) cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+/* Icon Styling - Now glowing green */
+.fintech-icon-wrapper {
+  background-color: rgba(84, 199, 80, 0.1);
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px auto;
+  /* Glowing ring around the icon */
+  border: 2px solid var(--color-accent);
+  box-shadow: 0 0 15px rgba(84, 199, 80, 0.3);
+}
+
+.fintech-lock-icon {
+  width: 28px;
+  height: 28px;
+  color: var(--color-accent);
+}
+
+/* Typography - Light text */
+.fintech-title {
+  color: var(--color-text);
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  letter-spacing: -0.5px;
+}
+
+.fintech-subtitle {
+  color: #a0a0a0; /* Muted gray */
+  font-size: 15px;
+  line-height: 1.5;
+  margin-bottom: 35px;
+}
+
+/* Input Group */
+.fintech-input-group {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 35px;
+}
+
+/* --- RE-IMAGINED INPUTS --- */
+.fintech-otp-input {
+  width: 54px; /* Fixed width for perfect squares */
+  height: 54px;
+  font-size: 24px;
+  text-align: center;
+  
+  /* Dark background with subtle green border */
+  background-color: var(--color-input-bg);
+  border: 2px solid var(--color-border-subtle);
+  border-radius: 12px;
+  
+  /* Text is neon green */
+  color: var(--color-accent);
+  font-weight: 700;
+  transition: all 0.2s ease-in-out;
+  outline: none;
+  caret-color: var(--color-accent);
+}
+
+/* Focus State - Bright green flash */
+.fintech-otp-input:focus {
+  border-color: var(--color-accent);
+  background-color: rgba(84, 199, 80, 0.05);
+  box-shadow: 0 0 0 4px rgba(84, 199, 80, 0.15), inset 0 0 10px rgba(84, 199, 80, 0.1);
+  transform: translateY(-3px);
+}
+
+/* --- RE-IMAGINED BUTTON --- */
+.fintech-verify-btn {
+  width: 100%;
+  padding: 16px;
+  
+  /* Neon Green background */
+  background-color: var(--color-accent);
+  /* Dark text for high contrast */
+  color: #060c06;
+  
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  
+  /* Green button glow */
+  box-shadow: 0 5px 20px rgba(84, 199, 80, 0.3);
+  letter-spacing: 0.5px;
+}
+
+.fintech-verify-btn:hover {
+  background-color: #60d85c; /* Slightly brighter green */
+  box-shadow: 0 8px 30px rgba(84, 199, 80, 0.5);
+  transform: translateY(-2px);
+}
+
+.fintech-verify-btn:active {
+  transform: scale(0.98);
+}
+
+/* Resend Link - Glowing green text */
+.fintech-resend-wrapper {
+  margin-top: 28px;
+  font-size: 14px;
+}
+
+.fintech-text-muted {
+  color: #a0a0a0;
+}
+
+.fintech-resend-link {
+  background: none;
+  border: none;
+  color: var(--color-accent);
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0 6px;
+  transition: all 0.2s;
+}
+
+.fintech-resend-link:hover {
+  text-decoration: none;
+  text-shadow: 0 0 10px rgba(84, 199, 80, 0.6);
+}
+
+/* New Cyber Animation */
+@keyframes cyberSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 480px) {
+  .fintech-input-group {
+    gap: 8px;
+  }
+  
+  .fintech-otp-input {
+    width: 44px;
+    height: 44px;
+    font-size: 20px;
+    border-radius: 10px;
+  }
+  
+  .fintech-otp-card {
+    padding: 30px 20px;
+  }
+}

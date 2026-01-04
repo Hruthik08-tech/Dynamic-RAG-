@@ -1,0 +1,174 @@
+:root {
+  /* Strict Palette Mapping */
+  --color-bg: #060c06; /* Deepest Black-Green */
+  --color-surface: #1e1e1e; /* Dark Gray / Card Surface */
+  --color-accent: #54c750; /* Vibrant Neon Green */
+  --color-text: #f0f2f0; /* Off-White */
+
+  /* Cyber-Specific UI Variables */
+  --si-input-bg: #0a0f0a;
+  --si-border-glow: rgba(84, 199, 80, 0.3);
+  --si-shadow: 0 0 25px rgba(84, 199, 80, 0.2);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-bg);
+}
+
+.si-page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  /* Matching your Home/OTP background theme */
+  background: radial-gradient(circle at 50% 30%, #1e1e1e 0%, #060c06 100%);
+  font-family: "Inter", sans-serif;
+  color: var(--color-text);
+  padding: 20px;
+}
+
+/* --- The Re-imagined Cyber Card --- */
+.si-card {
+  background-color: rgba(30, 30, 30, 0.95);
+  backdrop-filter: blur(12px);
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow: var(--si-shadow), 0 10px 40px rgba(0, 0, 0, 0.6);
+  width: 100%;
+  max-width: 420px;
+  border: 1px solid var(--si-border-glow);
+
+  /* Smooth entry consistent with OTP module */
+  animation: siSlideIn 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.si-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.si-header h2 {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.si-header p {
+  color: #a0a0a0; /* Muted gray for dark mode */
+  font-size: 0.95rem;
+  margin-top: 0.6rem;
+}
+
+.si-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.si-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.si-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.si-forgot-pwd {
+  font-size: 0.75rem;
+  color: var(--color-accent);
+  cursor: pointer;
+  font-weight: 600;
+  transition: text-shadow 0.2s;
+}
+
+.si-forgot-pwd:hover {
+  text-shadow: 0 0 8px rgba(84, 199, 80, 0.6);
+}
+
+.si-input-group label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #d1d1d1;
+}
+
+/* --- Cyber Input Styling --- */
+.si-input-group input {
+  padding: 0.9rem 1.1rem;
+  border-radius: 10px;
+  border: 2px solid var(--si-border-glow);
+  background-color: var(--si-input-bg);
+  color: var(--color-accent); /* Green text typing */
+  outline: none;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 1rem;
+}
+
+.si-input-group input:focus {
+  border-color: var(--color-accent);
+  background-color: rgba(84, 199, 80, 0.05);
+  box-shadow: 0 0 0 4px rgba(84, 199, 80, 0.15);
+  transform: translateY(-1px);
+}
+
+/* --- The High-Contrast Button --- */
+.si-submit-btn {
+  background-color: var(--color-accent);
+  color: #060c06; /* High contrast dark text */
+  padding: 1rem;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 0.8rem;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 15px rgba(84, 199, 80, 0.3);
+}
+
+.si-submit-btn:hover {
+  background-color: #60d85c;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(84, 199, 80, 0.5);
+}
+
+.si-submit-btn:active {
+  transform: scale(0.98);
+}
+
+.si-footer {
+  margin-top: 1.8rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #a0a0a0;
+}
+
+.si-link {
+  color: var(--color-accent);
+  font-weight: 600;
+  cursor: pointer;
+  margin-left: 4px;
+  transition: color 0.2s;
+}
+
+.si-link:hover {
+  text-decoration: underline;
+  color: #60d85c;
+}
+
+@keyframes siSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,149 @@
+/* ===============================
+   Global Theme Variables
+   (Aligned with your Strict Palette)
+================================ */
+:root {
+  --color-bg: #060c06; /* Deepest Black-Green */
+  --color-surface: #1e1e1e; /* Dark Gray */
+  --color-accent: #54c750; /* Vibrant Green */
+  --color-highlight: #54c750; /* Green (Unified for consistency) */
+  --color-text: #f0f2f0; /* Off-White */
+
+  /* Additional definitions for depth */
+  --color-text-muted: #5b5b5b; /* Mid Gray for subtitles */
+  --shadow-glow: 0 0 25px rgba(84, 199, 80, 0.25);
+}
+
+/* ===============================
+   Main Container
+================================ */
+.cyber-home-container {
+  min-height: 100vh;
+  /* Dark "Spotlight" Gradient: #1e1e1e fading to #060c06 */
+  background: radial-gradient(
+    circle at 50% 30%,
+    #1e1e1e 0%,
+    #0c140c 50%,
+    #060c06 100%
+  );
+  color: #f0f2f0;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    sans-serif;
+}
+
+/* ===============================
+   Hero Section
+================================ */
+.cyber-hero-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  text-align: center;
+}
+
+/* ===============================
+   Hero Content Wrapper
+================================ */
+.cyber-hero-content {
+  max-width: 720px;
+  margin-bottom: 8vh;
+  /* Optional: Add slight fade-in animation */
+  animation: fadeIn Up 0.8s ease-out;
+}
+
+/* ===============================
+   Hero Title
+================================ */
+.cyber-hero-title {
+  color: var(--color-text);
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -1px;
+  margin-bottom: 1.5rem;
+}
+
+/* Accent word */
+.highlight-text {
+  color: var(--color-accent);
+  /* Green glow effect using your palette */
+  text-shadow: var(--shadow-glow);
+}
+
+/* ===============================
+   Subtitle
+================================ */
+.cyber-hero-subtitle {
+  /* Using slightly lighter than #5b5b5b for readability on dark bg */
+  color: #a0a0a0;
+  font-size: 1.15rem;
+  font-weight: 400;
+  line-height: 1.6;
+  max-width: 540px;
+  margin: 0 auto 3rem auto;
+}
+
+/* ===============================
+   Primary CTA Button
+================================ */
+.cyber-hero-cta {
+  background-color: var(--color-highlight);
+  color: #060c06; /* Dark text on green button for high contrast/readability */
+  border: none;
+  padding: 16px 42px;
+  border-radius: 999px; /* Pill shape */
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+  /* Green shadow based on palette */
+  box-shadow: 0 10px 30px rgba(84, 199, 80, 0.25);
+  letter-spacing: 0.5px;
+}
+
+.cyber-hero-cta:hover {
+  transform: translateY(-4px);
+  background-color: #60d85c; /* Slightly lighter green */
+  box-shadow: 0 20px 40px rgba(84, 199, 80, 0.4);
+}
+
+.cyber-hero-cta:active {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 15px rgba(84, 199, 80, 0.3);
+}
+
+/* ===============================
+   Responsive Adjustments
+================================ */
+@media (max-width: 768px) {
+  .cyber-hero-title {
+    font-size: 2.5rem;
+  }
+
+  .cyber-hero-subtitle {
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+
+  .cyber-hero-content {
+    margin-bottom: 5vh;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

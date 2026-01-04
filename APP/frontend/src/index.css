@@ -1,0 +1,22 @@
+/* index.css */
+:root {
+  --color-bg: #060c06;
+  --color-text: #f0f2f0;
+}
+
+/* Force the browser window itself to be dark */
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #060c06 !important; /* Force black-green */
+  color: #f0f2f0 !important;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}

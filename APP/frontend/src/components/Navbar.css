@@ -1,0 +1,161 @@
+:root {
+  /* Strict Palette Mapping */
+  --color-bg: #060c06; /* Deepest Black-Green */
+  --color-surface: #1e1e1e; /* Dark Gray */
+  --color-accent: #54c750; /* Vibrant Green */
+  --color-highlight: #54c750; /* Unified Green */
+  --color-text: #f0f2f0; /* Off-White */
+  --nav-margin: 16px;
+
+  /* Helper for translucent glass effect */
+  --nav-glass-bg: rgba(30, 30, 30, 0.85);
+  --nav-glass-scrolled: rgba(30, 30, 30, 0.95);
+  --nav-border: rgba(91, 91, 91, 0.4);
+}
+
+/* ===============================
+   Floating Container
+================================ */
+.cyber-nav-container {
+  position: sticky;
+  color: var(--color-bg);
+  background-color: var(--color-bg);
+  top: var(--nav-margin);
+  margin: var(--nav-margin);
+  z-index: 1000;
+  transition: all 0.25s ease;
+}
+
+/* ===============================
+   Navbar Body
+================================ */
+.cyber-nav-content {
+  background-color: var(--nav-glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px); /* Safari support */
+  border: 1px solid var(--nav-border);
+  border-radius: 999px;
+  padding: 0.7rem 1.8rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  /* Deep shadow for floating depth */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* ===============================
+   Brand Section
+================================ */
+.cyber-nav-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cyber-brand-name {
+  color: var(--color-text);
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  font-size: 1rem;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.cyber-logo {
+  width: 40px;
+  height: 40px;
+}
+
+/* ===============================
+   Navigation Links
+================================ */
+.cyber-nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+}
+
+.cyber-nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.25rem;
+  margin: 0;
+  padding: 0;
+}
+
+.cyber-link {
+  text-decoration: none;
+  color: #a0a0a0; /* Muted gray for idle state */
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.cyber-link:hover {
+  color: var(--color-accent);
+  text-shadow: 0 0 8px rgba(84, 199, 80, 0.4);
+}
+
+/* ===============================
+   CTA Button (Chat-style)
+================================ */
+.cyber-cta-button {
+  background-color: var(--color-highlight);
+  color: #060c06; /* Dark text on green background for contrast */
+  border: none;
+  padding: 9px 20px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+
+  /* Green glow shadow */
+  box-shadow: 0 6px 20px rgba(84, 199, 80, 0.25);
+}
+
+.cyber-cta-button:hover {
+  transform: translateY(-1px);
+  background-color: #60d85c;
+  box-shadow: 0 10px 28px rgba(84, 199, 80, 0.4);
+}
+
+.cyber-cta-button .arrow {
+  transition: transform 0.2s ease;
+}
+
+.cyber-cta-button:hover .arrow {
+  transform: translateX(3px);
+}
+
+/* ===============================
+   User Profile
+================================ */
+.cyber-user-profile {
+  display: flex;
+  align-items: center;
+  padding: 4px 12px;
+  background: rgba(84, 199, 80, 0.1);
+  border: 1px solid rgba(84, 199, 80, 0.2);
+  border-radius: 20px;
+}
+
+.cyber-username {
+  color: var(--color-accent);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* ===============================
+   Scroll State
+================================ */
+.cyber-nav-container.scrolled .cyber-nav-content {
+  background-color: var(--nav-glass-scrolled);
+  padding: 0.55rem 1.4rem;
+  border-color: #5b5b5b; /* Slightly lighter border when scrolled */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}

@@ -1,0 +1,173 @@
+:root {
+  /* Strict Palette Mapping */
+  --color-bg: #060c06; /* Deepest Black-Green */
+  --color-surface: #1e1e1e; /* Dark Gray / Card Surface */
+  --color-accent: #54c750; /* Vibrant Neon Green */
+  --color-text: #f0f2f0; /* Off-White */
+
+  /* Cyber-Specific UI Variables */
+  --sp-input-bg: #0a0f0a;
+  --sp-border-glow: rgba(84, 199, 80, 0.3);
+  --sp-shadow: 0 0 25px rgba(84, 199, 80, 0.2);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-bg);
+}
+
+.sp-page-container {
+  min-height: 100vh;
+  /* Matching your Global Background Gradient */
+  background: radial-gradient(circle at 50% 30%, #1e1e1e 0%, #060c06 100%);
+  font-family: "Inter", -apple-system, sans-serif;
+  color: var(--color-text);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  padding: 20px;
+}
+
+/* --- Re-imagined Cyber Card --- */
+.sp-card {
+  background-color: rgba(30, 30, 30, 0.95);
+  backdrop-filter: blur(12px);
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow: var(--sp-shadow), 0 10px 40px rgba(0, 0, 0, 0.6);
+  width: 100%;
+  max-width: 420px;
+  border: 1px solid var(--sp-border-glow);
+
+  /* Entry animation for consistency */
+  animation: spFadeUp 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.sp-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.sp-header h2 {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--color-text);
+  letter-spacing: -0.5px;
+}
+
+.sp-header p {
+  color: #a0a0a0; /* Muted gray */
+  font-size: 0.95rem;
+  margin-top: 0.6rem;
+}
+
+.sp-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.sp-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+/* --- Feedback Messages --- */
+.sp-message {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+.sp-message.success {
+  color: var(--color-accent); /* Neon Green */
+}
+.sp-message.error {
+  color: #ff4d4d; /* Bright Red for contrast */
+}
+
+.sp-input-group label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #d1d1d1;
+}
+
+/* --- Cyber Input Styling --- */
+.sp-input-group input {
+  padding: 0.9rem 1.1rem;
+  border-radius: 10px;
+  border: 2px solid var(--sp-border-glow);
+  background-color: var(--sp-input-bg);
+  color: var(--color-accent); /* Green text typing */
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+  font-size: 1rem;
+}
+
+.sp-input-group input:focus {
+  border-color: var(--color-accent);
+  background-color: rgba(84, 199, 80, 0.05);
+  box-shadow: 0 0 0 4px rgba(84, 199, 80, 0.15);
+  transform: translateY(-1px);
+}
+
+/* --- The High-Contrast Green Button --- */
+.sp-submit-btn {
+  background-color: var(--color-accent);
+  color: #060c06; /* Dark text for readability */
+  padding: 1rem;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  margin-top: 0.8rem;
+  box-shadow: 0 5px 20px rgba(84, 199, 80, 0.3);
+}
+
+.sp-submit-btn:hover {
+  background-color: #60d85c;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(84, 199, 80, 0.5);
+}
+
+.sp-submit-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.sp-footer {
+  margin-top: 1.8rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #a0a0a0;
+}
+
+.sp-link {
+  color: var(--color-accent);
+  font-weight: 600;
+  cursor: pointer;
+  margin-left: 4px;
+  transition: all 0.2s;
+}
+
+.sp-link:hover {
+  text-decoration: none;
+  text-shadow: 0 0 8px rgba(84, 199, 80, 0.6);
+}
+
+/* Custom Animation */
+@keyframes spFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
