@@ -1,16 +1,47 @@
-# React + Vite
+# Authenticator Service - Frontend 🔒
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The dedicated user interface for the Multi-Factor Authentication (MFA) service.
 
-Currently, two official plugins are available:
+## ✨ Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Secure Login/Signup**: Interfaces for user authentication.
+- **MFA Verification**: UI for entering verification codes.
+- **Visuals**: Enhanced with **Vanta.js** and **Three.js** for a premium feel.
+- **Responsive**: Works across devices.
 
-## React Compiler
+## 🛠 Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Framework**: React 19
+- **Build Tool**: Vite
+- **Visuals**: Vanta.js, Three.js
+- **Routing**: React Router DOM
 
-## Expanding the ESLint configuration
+## 🚀 Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Prerequisites
+
+- Ensure the **AUTHENTICATOR Backend** is running.
+
+### Installation
+
+1. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+2. Start the development server:
+
+   ```bash
+   npm run dev
+   ```
+
+3. Open your browser at: `http://localhost:5000`
+   > **Note:** This frontend is configured to run on port **5000** by default.
+
+## 📂 Structure
+
+- `src/`: Main source code
+  - `components/`: Reusable UI components
+  - `pages/`: Authentication pages (Login, Signup, Verify)
+  - `assets/`: Static assets

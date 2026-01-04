@@ -1,172 +1,101 @@
-# DYNAMIC RAG 🚀  
-An AI-powered MERN stack application designed to support **Dynamic RAG (Retrieval-Augmented Generation)** and real-time communication using **Socket.io**.
+# DYNAMIC RAG 🚀
 
-> ⚠️ **NOTE:**  
-> You must have **Node.js (latest version)** installed on your system before setting up this project.  
-> Download Node.js from: https://nodejs.org
+An advanced project ecosystem combining a real-time RAG (Retrieval-Augmented Generation) application with a dedicated Multi-Factor Authentication (MFA) service.
 
----
+## 📂 Project Structure
 
-## 🧠 Project Overview
+The project is organized into two main modules:
 
-**DYNAMIC RAG** is a full-stack MERN application intended to:
-- Support real-time features using **Socket.io**
-- Connect to **MongoDB Atlas**
-- Serve as a foundation for **AI-powered RAG features**
-- Run in a **development environment**
+### 1. **APP** (Main Application)
+
+The core application that handles:
+
+- **Real-time Communication**: Powered by **Socket.io**.
+- **RAG Capabilities**: Foundation for AI-driven retrieval and generation.
+- **Frontend**: A React + Vite application with dynamic visuals (Vanta.js).
+- **Backend**: An Express.js server with MongoDB integration.
+
+### 2. **AUTHENTICATOR** (Security Service)
+
+A standalone service dedicated to user security:
+
+- **Multi-Factor Authentication (MFA)**.
+- **JWT-based Auth**: Secure session management.
+- **Email Notifications**: Using Nodemailer.
+- **Frontend**: A React + Vite interface running on port 5000.
+- **Backend**: An Express.js server handling auth logic.
 
 ---
 
 ## 🛠 Tech Stack
 
-### Backend
-- Node.js
-- Express.js
-- MongoDB Atlas
-- Mongoose
-- Socket.io
-- dotenv
-- cors
+### **APP**
 
-### Frontend
-- React
-- Vite
+- **Frontend**: React, Vite, Socket.io-client, Vanta.js, Three.js
+- **Backend**: Node.js, Express, Mongoose, Socket.io
+
+### **AUTHENTICATOR**
+
+- **Frontend**: React, Vite, Vanta.js, Three.js
+- **Backend**: Node.js, Express, Mongoose, JWT, Bcrypt, Nodemailer
 
 ---
 
-## 📦 Prerequisites
+## 🚀 Getting Started
 
-Make sure you have the following installed:
-- **Node.js (latest version)**
-- **npm**
-- **MongoDB Atlas account**
-- A modern web browser
+### Prerequisites
 
----
+- **Node.js** (Latest LTS recommended)
+- **MongoDB Atlas** account and connection string
 
-## 📁 Project Structure
+### 1️⃣ Setting up the **APP** (Main Application)
 
-```
-project-root/
-│
-├── backend/
-│   ├── server/
-│   │   └── index.js
-│   ├── models/
-│   ├── connections/
-│   ├── rag/
-│   ├── socket-utils/
-│   ├── package.json
-│   └── .gitignore
-│
-├── frontend/
-│   ├── src/
-│   ├── package.json
-│   └── vite.config.js
-│
-└── README.md
-```
+#### Backend
 
----
+1. Navigate to `APP/backend`.
+2. Create a `.env` file with:
+   ```env
+   MONGO_URL_CHAT=your_mongodb_connection_string
+   PORT=3001
+   ```
+3. Install and run:
+   ```bash
+   npm install
+   npm start
+   ```
 
-## 🔐 Environment Variables (Backend)
+#### Frontend
 
-Create a `.env` file inside the **backend** directory.
-
-```env
-MONGO_URL_CHAT=your_mongodb_atlas_connection_string
-ORIGIN=http://localhost:5173
-PORT=3001
-```
-
-⚠️ **Never commit `.env` files to GitHub.**
+1. Navigate to `APP/frontend`.
+2. Install and run:
+   ```bash
+   npm install
+   npm run dev
+   ```
+   > Runs on default Vite port (usually `http://localhost:5173`)
 
 ---
 
-## 🗄 MongoDB Atlas Setup
+### 2️⃣ Setting up the **AUTHENTICATOR**
 
-1. Create a cluster on **MongoDB Atlas**
-2. Create a database user
-3. Whitelist your IP address
-4. Copy the connection string
-5. Paste it into `MONGO_URL_CHAT` in the `.env` file
+#### Backend
 
----
+1. Navigate to `AUTHENTICATOR/backend`.
+2. Create a `.env` file with your auth secrets (DB URL, JWT Secret, Email creds).
+3. Install and run:
+   ```bash
+   npm install
+   node index.js
+   ```
 
-## ▶️ Running the Application (Development)
+#### Frontend
 
-### 1️⃣ Start the Backend (Required First)
-
-Open a terminal and run:
-
-```bash
-cd backend
-cd server
-node index.js
-```
-
-- Backend runs on port **3001**
-- Socket.io server initializes on the same port
-
-### 2️⃣ Start the Frontend
-
-Open a **new terminal** and run:
-
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-- Frontend runs on **http://localhost:5173**
+1. Navigate to `AUTHENTICATOR/frontend`.
+2. Install and run:
+   ```bash
+   npm install
+   npm run dev
+   ```
+   > **Note:** Configured to run on **port 5000** (`http://localhost:5000`)
 
 ---
-
-## 🔌 Socket.io Notes
-
-- Backend must be running **first**
-- Frontend connects to Socket.io at: `http://localhost:3001`
-
----
-
-## 🤖 RAG (Retrieval-Augmented Generation)
-
-- RAG-related logic lives inside the `backend/rag` directory
-- AI integrations will be added in future updates
-- Project structure is prepared for easy extension
-
----
-
-## ❗ Common Issues & Fixes
-
-### Backend not starting
-- Check `.env` values
-- Verify MongoDB Atlas connection string
-- Ensure port **3001** is not in use
-
-### Frontend not connecting
-- Make sure backend is running
-- Verify `ORIGIN` value in `.env`
-
----
-
-## 🧪 Development Only
-
-This project is currently configured for:
-- ✅ Development use only
-- ❌ No production build setup yet
-
----
-
-## 📌 Final Notes
-
-- Do **NOT** commit `node_modules`
-- Do **NOT** commit `.env`
-- Always start **backend before frontend**
-- Keep Node.js updated
-
-
-
----
-
-**Happy Coding! 🎉**
