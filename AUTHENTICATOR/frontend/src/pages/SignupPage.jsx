@@ -1,72 +1,44 @@
-import { useNavigate } from 'react-router-dom';
-import Navbar from '../components/Navbar';
 
+// Import components
+import Navbar from '../components/Navbar';
 import './SignupPage.css';
 
+// Importing built-in modules 
 import React, { useState, useEffect, useRef } from 'react';
-import HALO from 'vanta/dist/vanta.halo.min'; // Import vanta birds 
+import { useNavigate } from 'react-router-dom';
+
+// Import vanta modules for animation
+import HALO from 'vanta/dist/vanta.halo.min'; // Import vanta HALO
 import * as THREE from 'three'; // Import three.js 
 
 
 
 const SignupPage = () => {
-  const [formData, setformData] = useState({});
-  const [message, setMessage] = useState('');
-  const [messageType, setMessageType] = useState('');
+
+  // useState hooks 
+  const [formData, setformData] = useState({});         // formData to collect details and send to backend 
+  const [message, setMessage] = useState('');           // message to display (backend response)
+  const [messageType, setMessageType] = useState('');   // message type to display to user (success/error)
 
 
+  // handles change in input fields 
   const handleChange = (e) => {
     const {name, value} = e.target;
     setformData(prevState => ({
       ...prevState, 
+      // name: name of the input filed 
+      // value: value of the input filed 
       [name]: value 
     }))
   }
 
-  const sendData = async () => {
-    try {
-      const ROUTE_AUTHENTICATOR_BACKEND = import.meta.env.VITE_ROUTE_AUTHENTICATOR_BACKEND;
-      const url = `${ROUTE_AUTHENTICATOR_BACKEND}/api/registerUser`;
-      const data = {
-        username: formData.username,
-        email: formData.email,
-        password: formData.password,
-        date: new Date().toISOString(),
-        role: 'user', 
-        isVerified: false, 
-        otp: ''
-      };
-      const response = await fetch(url, {
-        method: 'POST', 
-        headers: {
-          'content-type': 'application/json'
-        }, 
-        body: JSON.stringify(data)
 
-      });
-      const result = await response.json();
-
-      // messages to display 
-      if (response.ok) {
-        setMessage(result.message || "Registration successful");
-        setMessageType(result.message || 'success');
-      } else {
-        setMessage(result.message || "Registration failed");
-        setMessageType(result.message || 'error');
-      }
-
-      return result;
-  } catch (error) {
-    setMessage("Network error. Please try again");
-    setMessageType("error");
-
-  }
-
-};
-
+  
   const handleSubmit = (e) => {
+    // redirects to avatar selection page, along with the formData
     e.preventDefault();
-    sendData();
+    console.log("SignupPage - Submitting formData:", formData);
+    navigate('/avatar-selection', { state: { formData } });
 
   }
 
@@ -74,10 +46,11 @@ const SignupPage = () => {
   const navigate = useNavigate();
 
   const handleNavigation = () => {
+    // redirects to signin page
     navigate('/signin');
   };
 
-  // create animation 
+  // animation hooks 
   const [vantaEffect, setVantaEffect] = useState(null);
   const vantaRef = useRef(null);
 
@@ -86,8 +59,8 @@ const SignupPage = () => {
     if (!vantaEffect) {
       setVantaEffect(
         HALO({
-          el: vantaRef.current, // Use the ref instead of a CSS selector
-          THREE: THREE,         // Pass the Three.js library explicitly
+          el: vantaRef.current, 
+          THREE: THREE,         
           mouseControls: true,
           touchControls: true,
           gyroControls: false,
@@ -110,6 +83,7 @@ const SignupPage = () => {
   return (
     <div className="sp-page-container" ref = {vantaRef}> 
       <Navbar />
+      {/* signup form */}
       <div className="sp-card" style = {{position: 'relative', zIndex: 1}}> 
         <div className="sp-header">
           <h2>Create Account</h2>

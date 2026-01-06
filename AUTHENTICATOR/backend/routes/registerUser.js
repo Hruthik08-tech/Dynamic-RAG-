@@ -1,5 +1,5 @@
 import express from 'express';
-import cors from 'cors';
+
 
 import { User } from '../models/userModel.js';
 import { hashPassword } from '../utils/hashPassword.js';
@@ -9,11 +9,13 @@ const router = express.Router();
 
 router.post('/api/registerUser', async(req, res) => {
     try{
-        const {username, email, password, date, role, isVerified, otp} = req.body;
+        const {username, email, password, date, role, isVerified, avatar, otp} = req.body;
 
         if (!email || !password) {
+            console.log("Registration failed: Missing email or password. Received keys:", Object.keys(req.body));
             return res.status(400).json({
                 message: "Email and Password required", 
+                receivedKeys: Object.keys(req.body)
             })
         }
         const existing = await User.findOne({email});
@@ -34,6 +36,7 @@ router.post('/api/registerUser', async(req, res) => {
             date: date, 
             role: role, 
             isVerified: isVerified, 
+            avatar: avatar,
             otp: otp, 
 
         })

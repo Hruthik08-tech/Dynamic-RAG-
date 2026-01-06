@@ -49,11 +49,13 @@ body {
   margin-bottom: 2.5rem;
 }
 
-.si-header h2 {
+.si-message {
   margin: 0;
   font-size: 1.8rem;
   font-weight: 700;
   letter-spacing: -0.5px;
+  color: var(--color-text);
+  transition: color 0.2s;
 }
 
 .si-header p {

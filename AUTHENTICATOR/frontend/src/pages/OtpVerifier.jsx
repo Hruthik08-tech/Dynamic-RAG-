@@ -1,22 +1,28 @@
-import React, { useState, useRef, useEffect } from 'react';
+
+// Import pages 
 import './OtpVerifier.css';
 import Navbar from '../components/Navbar';
 
+// Import built-in modules 
+import React, { useState, useRef, useEffect } from 'react';
 
-import HALO from 'vanta/dist/vanta.halo.min'; // Import vanta birds 
+// Import vanta modules for animation
+import HALO from 'vanta/dist/vanta.halo.min'; // Import vanta HALO
 import * as THREE from 'three'; // Import three.js 
 
 
 const OtpVerifier = () => {
+
+  // useState hooks 
   const [otp, setOtp] = useState(new Array(6).fill(""));
   const inputRefs = useRef([]);
 
-  // messages to display in the frontend 
+  // message hooks to display if otp verification is successfull or not 
   const [message, setMessage] = useState('');
   const [messageType, setMessageType] = useState('');
 
 
-  // animation part 
+  // focus animation hooks 
   useEffect(() => {
     // Auto-focus the first input on load
     if (inputRefs.current[0]) {
@@ -75,6 +81,8 @@ const OtpVerifier = () => {
 
   // handling submit to the backend. 
   const sendData = async () => {
+
+    // ROUTE_AUTHENTICATOR_BACKEND: route to authenticator backend server
     const ROUTE_AUTHENTICATOR_BACKEND = import.meta.env.VITE_ROUTE_AUTHENTICATOR_BACKEND;
     const url = `${ROUTE_AUTHENTICATOR_BACKEND}/api/verifyOTP`;
     const otpString = otp.join('');
@@ -96,7 +104,10 @@ const OtpVerifier = () => {
         setMessage(result.message || 'OTP verified successfully.');
         setMessageType(result.ok || 'success');
 
+        // ROUTE_APP_FRONTEND: route to app frontend server 
         const ROUTE_APP_FRONTEND = import.meta.env.VITE_ROUTE_APP_FRONTEND;
+        // location for redirecting to frontend server
+        // q params: username
         window.location.href = `${ROUTE_APP_FRONTEND}?username=${result.username}`;
       } else {
         // error message to display in the frontend 
@@ -126,7 +137,7 @@ const OtpVerifier = () => {
 
   }
 
-    // create animation
+  // vanta animation hooks 
   const [vantaEffect, setVantaEffect] = useState(null);
   const vantaRef = useRef(null);
 
@@ -135,8 +146,8 @@ const OtpVerifier = () => {
     if (!vantaEffect) {
       setVantaEffect(
         HALO({
-          el: vantaRef.current, // Use the ref instead of a CSS selector
-          THREE: THREE,         // Pass the Three.js library explicitly
+          el: vantaRef.current, 
+          THREE: THREE,        
           mouseControls: true,
           touchControls: true,
           gyroControls: false,
@@ -157,6 +168,7 @@ const OtpVerifier = () => {
   return (
     <div className="fintech-otp-container" ref = {vantaRef}>
       <Navbar />
+      {/* otp card */}
       <div className="fintech-otp-card" style = {{position: "relative", zIndex: 1}}>
         <div className="fintech-icon-wrapper">
           <svg 

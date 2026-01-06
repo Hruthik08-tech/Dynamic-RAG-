@@ -2,6 +2,25 @@ import React, { useState, useEffect, useRef } from 'react';
 import io from 'socket.io-client';
 import './ChatInterface.css';
 
+import avatar_1 from '../assets/avatar_1.png';
+import avatar_2 from '../assets/avatar_2.png';
+import avatar_3 from '../assets/avatar_3.png';
+import avatar_4 from '../assets/avatar_4.png';
+import avatar_5 from '../assets/avatar_5.png';
+import avatar_6 from '../assets/avatar_6.png';
+import avatar_7 from '../assets/avatar_7.png';
+import avatar_8 from '../assets/avatar_8.png';
+
+const AVATAR_MAP = {
+  1: avatar_1,
+  2: avatar_2,
+  3: avatar_3,
+  4: avatar_4,
+  5: avatar_5,
+  6: avatar_6,
+  7: avatar_7,
+  8: avatar_8,
+};
 
 const PORT_APP_BACKEND = import.meta.env.VITE_PORT_APP_BACKEND || '3001';
 const BACKEND_URL = `http://localhost:${PORT_APP_BACKEND}`;
@@ -11,7 +30,7 @@ console.log("Connecting to Socket.io at:", BACKEND_URL);
 // Connect to backend
 const socket = io(BACKEND_URL);
 
-const ChatInterface = () => {
+const ChatInterface = ({username, avatar}) => {
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
   const bottomRef = useRef(null);
@@ -55,6 +74,8 @@ const ChatInterface = () => {
     }
   };
 
+  const avatarSrc = AVATAR_MAP[avatar] || avatar_1;
+
   return (
     <div className="cyber-chat-layout">
       {/* Sidebar - mimicking ChatGPT history */}
@@ -66,8 +87,10 @@ const ChatInterface = () => {
           <div className="history-item">React Architecture</div>
         </div>
         <div className="user-profile">
-          <div className="user-avatar"></div>
-          <span>Guest User</span>
+          <div className="user-avatar">
+            <img src={avatarSrc} alt="User Avatar" className="sidebar-avatar-img" />
+          </div>
+          <span>{username || 'Guest'}</span>
         </div>
       </aside>
 

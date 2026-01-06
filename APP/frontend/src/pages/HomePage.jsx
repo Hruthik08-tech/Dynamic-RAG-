@@ -1,53 +1,28 @@
 
-import { useNavigate, useSearchParams } from 'react-router-dom';
+// Import pages 
 import Navbar from '../components/Navbar'; // Assuming Navbar files are in the same directory
 import './HomePage.css';
 
-// Adding vanta background animation 
+// Import built-in modules 
 import React, { useState, useEffect, useRef } from 'react';
-import NET from 'vanta/dist/vanta.net.min'; // Import vanta birds 
+import { useNavigate, useSearchParams } from 'react-router-dom';
+
+// Import vanta modules for animation 
+import NET from 'vanta/dist/vanta.net.min'; // Import vanta NET 
 import * as THREE from 'three'; // Import three.js 
 
-const ROUTE_AUTHENTICATOR_BACKEND = import.meta.env.VITE_ROUTE_AUTHENTICATOR_BACKEND;
 
-const HomePage = () => {
+
+const HomePage = ({username, avatar}) => {
 
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
-  const [username, setUsername] = useState('');
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      // 1. Check URL first
-      const urlUsername = searchParams.get('username');
-      if (urlUsername) {
-        setUsername(urlUsername);
-        return;
-      }
-
-      // 2. If not in URL, check session
-      try {
-        const response = await fetch(`${ROUTE_AUTHENTICATOR_BACKEND}/api/verifyUser`,  {
-          method: 'GET',
-          credentials: 'include',
-        });
-        const data = await response.json();
-        if (data.status) {
-          setUsername(data.existingUser);
-        }
-      } catch (error) {
-        console.error('Error fetching user:', error);
-      }
-    };
-
-    fetchUser();
-  }, [searchParams]);
 
   const handleGetStarted = () => {
+    // redirects to chat page 
     navigate('/chat');
   }
 
-  // Create a state to hold the effect and a ref for the container 
+  // vanta animation hooks 
   const [vantaEffect, setVantaEffect] = useState(null);
   const vantaRef = useRef(null);
 
@@ -80,7 +55,7 @@ const HomePage = () => {
 
   return (
     <div className="cyber-home-container" ref={vantaRef}>
-      <Navbar username={username} />
+      <Navbar avatar={avatar} username={username} />
       <main className="cyber-hero-section">
         <div className="cyber-hero-content">
           <h1 className="cyber-hero-title">

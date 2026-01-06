@@ -16,7 +16,7 @@ const tokenVerification = (req, res) => {
         } else {
             const existingUser = await User.findById(data.id)
             if (existingUser) {
-                return res.json({status: true, existingUser: existingUser.username});
+                return res.json({status: true, existingUser: existingUser.username, existingAvatar: existingUser.avatar});
 
             } else {
                 return res.json({status: false});

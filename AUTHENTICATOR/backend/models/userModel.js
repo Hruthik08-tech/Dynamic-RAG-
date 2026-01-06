@@ -22,10 +22,9 @@ const userSchema = new schema({
     role: {
         type: String, 
     }, 
-    isVerified: {
-        type: Boolean,
-        default: false,
-    },
+    avatar:{
+        type: String, 
+    }, 
     otp: {
         type: String,
     }

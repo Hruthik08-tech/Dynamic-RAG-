@@ -1,0 +1,302 @@
+:root {
+  /* Strict Palette Mapping */
+  --color-bg: #060c06;
+  --color-surface: #1e1e1e;
+  --color-accent: #54c750; /* Neon Green */
+  --color-text: #f0f2f0;
+
+  --av-glass: rgba(30, 30, 30, 0.95);
+  --av-border: rgba(84, 199, 80, 0.3);
+  --av-shadow-glow: 0 0 25px rgba(84, 199, 80, 0.2);
+}
+
+.av-page-container {
+  min-height: 100vh;
+  background: radial-gradient(circle at 50% 30%, #1e1e1e 0%, #060c06 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  font-family: "Inter", sans-serif;
+  color: var(--color-text);
+  overflow: hidden;
+}
+
+/* Glassmorphic Card */
+.av-card {
+  background-color: var(--av-glass);
+  backdrop-filter: blur(12px);
+  width: 100%;
+  max-width: 600px;
+  padding: 40px 30px;
+  border-radius: 24px;
+  border: 1px solid var(--av-border);
+  box-shadow: var(--av-shadow-glow), 0 20px 50px rgba(0, 0, 0, 0.6);
+  text-align: center;
+  animation: avFadeIn 0.5s ease-out;
+}
+
+.av-header h2 {
+  font-size: 2rem;
+  margin: 0 0 10px 0;
+  font-weight: 700;
+  letter-spacing: -1px;
+}
+
+.av-header p {
+  color: #a0a0a0;
+  margin: 0 0 30px 0;
+  font-size: 0.95rem;
+}
+
+.av-message {
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+  animation: avFadeIn 0.3s ease-out;
+}
+
+.av-message.success {
+  background: rgba(84, 199, 80, 0.1);
+  color: var(--color-accent);
+  border: 1px solid rgba(84, 199, 80, 0.3);
+}
+
+.av-message.error {
+  background: rgba(255, 82, 82, 0.1);
+  color: #ff5252;
+  border: 1px solid rgba(255, 82, 82, 0.3);
+}
+
+/* --- Carousel Logic --- */
+.av-carousel-wrapper {
+  position: relative;
+  height: 280px; /* Fixed height for animation area */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.av-track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1000px; /* Enables 3D effect */
+}
+
+/* Individual Item Styling */
+.av-item {
+  position: absolute;
+  transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.av-image-container {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: #0a0f0a;
+  border: 3px solid #3e3f3e;
+  overflow: hidden;
+  position: relative;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+.av-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.av-label {
+  margin-top: 15px;
+  font-weight: 600;
+  font-size: 1rem;
+  opacity: 0; /* Hidden by default */
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+  color: var(--color-text);
+}
+
+/* --- Animation States --- */
+
+/* 1. Active Item (Center) */
+.av-item.active {
+  z-index: 10;
+  transform: translateX(0) scale(1.3);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.av-item.active .av-label {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.av-item.active:hover .av-image-container {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 20px rgba(84, 199, 80, 0.4);
+}
+
+/* 2. Selection State (When clicked) */
+.av-item.active.selected .av-image-container {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 4px rgba(84, 199, 80, 0.2), 0 0 30px rgba(84, 199, 80, 0.4);
+}
+
+.av-check-badge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(84, 199, 80, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  color: white;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* 3. Side Items (Prev/Next) */
+.av-item.prev {
+  transform: translateX(-160px) scale(0.85);
+  opacity: 0.5;
+  z-index: 5;
+  filter: grayscale(100%) brightness(0.7);
+}
+
+.av-item.next {
+  transform: translateX(160px) scale(0.85);
+  opacity: 0.5;
+  z-index: 5;
+  filter: grayscale(100%) brightness(0.7);
+}
+
+/* 4. Hidden Items */
+.av-item.hidden {
+  transform: scale(0);
+  opacity: 0;
+}
+
+/* Navigation Buttons */
+.av-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(30, 30, 30, 0.8);
+  border: 1px solid var(--color-surface);
+  color: var(--color-accent);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  cursor: pointer;
+  z-index: 20;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.av-nav-btn:hover {
+  background: var(--color-accent);
+  color: #060c06;
+  box-shadow: 0 0 15px rgba(84, 199, 80, 0.5);
+}
+
+.av-nav-btn.left {
+  left: 0;
+}
+.av-nav-btn.right {
+  right: 0;
+}
+
+/* Footer & Actions */
+.av-footer {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.av-status {
+  font-size: 0.9rem;
+  color: #6c757d;
+  transition: color 0.3s;
+}
+
+.av-status.ready {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+.av-confirm-btn {
+  background-color: #2d2d2d; /* Disabled state color */
+  color: #888;
+  padding: 14px 40px;
+  border-radius: 99px;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: not-allowed;
+  transition: all 0.3s ease;
+}
+
+/* Active Button State */
+.av-confirm-btn:not(:disabled) {
+  background-color: var(--color-accent);
+  color: #060c06;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(84, 199, 80, 0.4);
+}
+
+.av-confirm-btn:not(:disabled):hover {
+  transform: translateY(-2px);
+  background-color: #60d85c;
+  box-shadow: 0 8px 30px rgba(84, 199, 80, 0.6);
+}
+
+@keyframes avFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes popIn {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Mobile Tweak */
+@media (max-width: 500px) {
+  .av-item.prev {
+    transform: translateX(-100px) scale(0.7);
+  }
+  .av-item.next {
+    transform: translateX(100px) scale(0.7);
+  }
+}
