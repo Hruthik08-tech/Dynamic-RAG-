@@ -1,0 +1,201 @@
+:root {
+  /* Strict Palette Mapping */
+  --color-bg: #060c06; /* Deepest Black-Green */
+  --color-surface: #1e1e1e; /* Dark Gray */
+  --color-accent: #54c750; /* Vibrant Green */
+  --color-highlight: #54c750; /* Unified Green */
+  --color-text: #f0f2f0; /* Off-White */
+  --nav-margin: 16px;
+
+  /* Helper for translucent glass effect */
+  --nav-glass-bg: rgba(30, 30, 30, 0.85);
+  --nav-glass-scrolled: rgba(30, 30, 30, 0.95);
+  --nav-border: rgba(91, 91, 91, 0.4);
+
+  --font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    sans-serif;
+}
+
+/* ===============================
+   Floating Container
+================================ */
+.cyber-nav-container {
+  position: sticky;
+  top: var(--nav-margin);
+  margin: var(--nav-margin);
+  z-index: 1000;
+  transition: all 0.25s ease;
+}
+
+/* ===============================
+   Navbar Body
+================================ */
+.cyber-nav-content {
+  background-color: var(--nav-glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px); /* Safari support */
+  border: 1px solid var(--nav-border);
+  border-radius: 999px;
+  padding: 0.7rem 1.8rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  /* Deep shadow for floating depth */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* ===============================
+   Brand Section
+================================ */
+.cyber-nav-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cyber-logo-icon {
+  width: 24px;
+  height: 24px;
+  background-color: var(--color-accent);
+  border-radius: 4px;
+  box-shadow: 0 0 10px var(--color-accent);
+}
+
+.cyber-brand-name {
+  color: var(--color-text);
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  font-size: 1rem;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+  text-decoration: none;
+}
+
+/* ===============================
+   Navigation Links
+================================ */
+.cyber-nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+}
+
+.cyber-nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.25rem;
+  margin: 0;
+  padding: 0;
+}
+
+.cyber-nav-item {
+  position: relative;
+  padding-bottom: 20px; /* Invisible bridge */
+  margin-bottom: -20px; /* Compensate for layout */
+}
+
+.cyber-link {
+  text-decoration: none;
+  color: #a0a0a0; /* Muted gray for idle state */
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.cyber-link:hover {
+  color: var(--color-accent);
+  text-shadow: 0 0 8px rgba(84, 199, 80, 0.4);
+}
+
+.cyber-link::after {
+  content: "▾";
+  font-size: 0.7rem;
+}
+
+/* ===============================
+   Dropdown Menus
+================================ */
+.cyber-dropdown {
+  position: absolute;
+  top: 100%; /* Align directly below */
+  left: 50%;
+  transform: translateX(-50%) translateY(-10px);
+  background-color: var(--nav-glass-scrolled);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--nav-border);
+  border-radius: 12px;
+  min-width: 160px;
+  padding: 8px;
+
+  /* Use visibility instead of display for transitions */
+  visibility: hidden;
+  opacity: 0;
+  display: flex; /* Keep flex layout but hidden */
+
+  flex-direction: column;
+  gap: 4px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  z-index: 1001;
+
+  /* Delay hiding to allow mouse movement */
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0s linear 0.2s;
+}
+
+.cyber-nav-item:hover .cyber-dropdown {
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  transition-delay: 0s; /* Show immediately */
+}
+
+.cyber-dropdown-item {
+  padding: 8px 12px;
+  color: #a0a0a0;
+  text-decoration: none;
+  font-size: 0.85rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.cyber-dropdown-item:hover {
+  background-color: rgba(84, 199, 80, 0.1);
+  color: var(--color-accent);
+}
+
+/* ===============================
+   Scroll State
+================================ */
+.cyber-nav-container.scrolled .cyber-nav-content {
+  background-color: var(--nav-glass-scrolled);
+  padding: 0.55rem 1.4rem;
+  border-color: #5b5b5b; /* Slightly lighter border when scrolled */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+/* Scrollbar for long dropdowns */
+.cyber-dropdown {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.cyber-dropdown::-webkit-scrollbar {
+  width: 4px;
+}
+
+.cyber-dropdown::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.cyber-dropdown::-webkit-scrollbar-thumb {
+  background: var(--nav-border);
+  border-radius: 10px;
+}
+
+.cyber-dropdown::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent);
+}

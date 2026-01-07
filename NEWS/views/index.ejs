@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Node SSR News</title>
+    <link rel="stylesheet" href="/css/navbar.css" />
+    <style>
+      :root {
+        --color-bg: #060c06;
+        --color-surface: #1e1e1e;
+        --color-surface-light: #3e3f3e;
+        --color-border: #5b5b5b;
+        --color-accent: #54c750;
+        --color-text: #f0f2f0;
+        --shadow-elevation: 0 4px 20px rgba(0, 0, 0, 0.6);
+        --gradient-sidebar: linear-gradient(180deg, #1e1e1e 0%, #060c06 100%);
+      }
+
+      body {
+        background-color: var(--color-bg);
+        color: var(--color-text);
+        font-family: "Inter", system-ui, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+
+
+      h1 {
+        color: var(--color-accent);
+        margin: 0;
+      }
+
+      /* --- News Grid Layout --- */
+      .news-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 40px auto;
+        padding: 0 20px;
+      }
+
+      /* --- The Cyber News Card --- */
+      .si-news-card {
+        background: var(--color-surface);
+        border-radius: 16px;
+        border: 1px solid var(--si-border-glow);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      }
+
+      .si-news-card:hover {
+        transform: translateY(-8px);
+        border-color: var(--color-accent);
+        box-shadow: var(--si-shadow);
+      }
+
+      /* Image Container with Overlay */
+      .card-image-wrapper {
+        position: relative;
+        height: 200px;
+        overflow: hidden;
+      }
+
+      .card-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+      }
+
+      .si-news-card:hover .card-img {
+        transform: scale(1.1);
+      }
+
+      /* Cyber Badge for Source */
+      .source-badge {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        background: var(--color-accent);
+        color: var(--color-bg);
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 0.7rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      }
+
+      /* Content Area */
+      .card-body {
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+      }
+
+      .card-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--color-text);
+        margin-bottom: 0.8rem;
+        line-height: 1.4;
+        text-decoration: none;
+        /* Multi-line truncation */
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      .card-title:hover {
+        color: var(--color-accent);
+      }
+
+      .card-description {
+        font-size: 0.9rem;
+        color: #a0a0a0;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+        flex-grow: 1;
+      }
+
+      /* Animated Call to Action */
+      .read-more {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--color-accent);
+        font-weight: 700;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        text-decoration: none;
+        transition: gap 0.2s ease;
+      }
+
+      .read-more:hover {
+        gap: 12px;
+      }
+
+      .read-more::after {
+        content: "→";
+        font-size: 1.1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="cyber-nav-container">
+      <div class="cyber-nav-content">
+        <div class="cyber-nav-left">
+          <div class="cyber-logo-icon"></div>
+          <a href="/" class="cyber-brand-name">NEON_NEWS</a>
+        </div>
+        <div class="cyber-nav-right">
+          <ul class="cyber-nav-links">
+            <li class="cyber-nav-item">
+              <span class="cyber-link">Category</span>
+              <div class="cyber-dropdown">
+                <a href="/category/business" class="cyber-dropdown-item"
+                  >Business</a
+                >
+                <a href="/category/entertainment" class="cyber-dropdown-item"
+                  >Entertainment</a
+                >
+                <a href="/category/general" class="cyber-dropdown-item"
+                  >General</a
+                >
+                <a href="/category/health" class="cyber-dropdown-item"
+                  >Health</a
+                >
+                <a href="/category/science" class="cyber-dropdown-item"
+                  >Science</a
+                >
+                <a href="/category/sports" class="cyber-dropdown-item"
+                  >Sports</a
+                >
+                <a href="/category/technology" class="cyber-dropdown-item"
+                  >Technology</a
+                >
+              </div>
+            </li>
+            <li class="cyber-nav-item">
+              <span class="cyber-link">Language</span>
+              <div class="cyber-dropdown">
+                <a href="/language/en" class="cyber-dropdown-item">English</a>
+                <a href="/language/es" class="cyber-dropdown-item">Spanish</a>
+                <a href="/language/fr" class="cyber-dropdown-item">French</a>
+                <a href="/language/de" class="cyber-dropdown-item">German</a>
+                <a href="/language/ru" class="cyber-dropdown-item">Russian</a>
+                <a href="/language/zh" class="cyber-dropdown-item">Chinese</a>
+              </div>
+            </li>
+            <li class="cyber-nav-item">
+              <span class="cyber-link">Country</span>
+              <div class="cyber-dropdown">
+                <a href="/country/us" class="cyber-dropdown-item"
+                  >United States</a
+                >
+                <a href="/country/gb" class="cyber-dropdown-item"
+                  >United Kingdom</a
+                >
+                <a href="/country/in" class="cyber-dropdown-item">India</a>
+                <a href="/country/ca" class="cyber-dropdown-item">Canada</a>
+                <a href="/country/au" class="cyber-dropdown-item">Australia</a>
+                <a href="/country/jp" class="cyber-dropdown-item">Japan</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+
+
+    <main>
+      <div class="news-grid">
+        <% articles.forEach(article => { %>
+        <article class="si-news-card">
+          <div class="card-image-wrapper">
+            <span class="source-badge"><%= article.source.name %></span>
+            <% if (article.urlToImage) { %>
+            <img
+              src="<%= article.urlToImage %>"
+              class="card-img"
+              alt="Headline"
+            />
+            <% } else { %>
+            <div
+              class="card-img"
+              style="
+                background: var(--si-input-bg);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: var(--color-border);
+              "
+            >
+              [ NO SIGNAL ]
+            </div>
+            <% } %>
+          </div>
+
+          <div class="card-body">
+            <a href="<%= article.url %>" target="_blank" class="card-title">
+              <%= article.title %>
+            </a>
+            <p class="card-description"><%= article.description %></p>
+            <a href="<%= article.url %>" target="_blank" class="read-more">
+              Full Report
+            </a>
+          </div>
+        </article>
+        <% }) %>
+      </div>
+    </main>
+
+    <script>
+      window.addEventListener("scroll", () => {
+        const nav = document.querySelector(".cyber-nav-container");
+        if (window.scrollY > 20) {
+          nav.classList.add("scrolled");
+        } else {
+          nav.classList.remove("scrolled");
+        }
+      });
+    </script>
+  </body>
+</html>
