@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cyber-News Live 2026</title>
+  <style>
+    :root {
+      /* Palette Mapping */
+      --color-bg: #060c06;
+      --color-surface: #1e1e1e;
+      --color-surface-light: #3e3f3e;
+      --color-border: #5b5b5b;
+      --color-accent: #54c750;
+      --color-text: #f0f2f0;
+      --si-border-glow: rgba(84, 199, 80, 0.2);
+      --si-shadow: 0 0 15px rgba(84, 199, 80, 0.15);
+      
+      --font-family: "Inter", system-ui, sans-serif;
+    }
+
+    body {
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-family);
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+
+    /* --- Hero Section (The "Hook") --- */
+    .featured-stream {
+      width: 100%;
+      height: 60vh;
+      position: relative;
+      background: #000;
+      margin-bottom: 3rem;
+    }
+
+    .featured-stream iframe { width: 100%; height: 100%; border: none; }
+
+    /* --- News Grid --- */
+    .main-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px 40px;
+    }
+
+    .section-title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--color-accent);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title::after {
+      content: "";
+      flex-grow: 1;
+      height: 1px;
+      background: var(--color-border);
+    }
+
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+
+    /* --- Cyber News Card --- */
+    .si-news-card {
+      background: var(--color-surface);
+      border-radius: 12px;
+      border: 1px solid var(--color-border);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .si-news-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--color-accent);
+      box-shadow: var(--si-shadow);
+    }
+
+    .card-image-wrapper {
+      position: relative;
+      padding-top: 56.25%; /* 16:9 Ratio */
+    }
+
+    .card-img {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .si-news-card:hover .card-img { transform: scale(1.05); }
+
+    .source-badge {
+      position: absolute;
+      top: 12px; left: 12px;
+      background: var(--color-accent);
+      color: var(--color-bg);
+      padding: 2px 10px;
+      border-radius: 4px;
+      font-size: 0.65rem;
+      font-weight: 900;
+    }
+
+    .card-body { padding: 1.25rem; flex-grow: 1; }
+
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .card-description {
+      font-size: 0.85rem;
+      color: #b0b0b0;
+      margin-bottom: 1.5rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .read-more {
+      margin-top: auto;
+      color: var(--color-accent);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: gap 0.2s;
+    }
+
+    .read-more:hover { gap: 10px; }
+  </style>
+</head>
+<body>
+
+
+  <!-- High Retention: Embed the first video as a hero stream -->
+  <section class="featured-stream">
+    <iframe src="https://www.youtube.com/embed/<%= streams[0].id.videoId %>?autoplay=1&mute=1" allowfullscreen></iframe>
+  </section>
+
+  <main class="main-container">
+    <h2 class="section-title">Global Live Feeds</h2>
+    
+    <div class="news-grid">
+      <% streams.slice(1).forEach(item => { %>
+        <div class="si-news-card">
+          <div class="card-image-wrapper">
+            <img class="card-img" src="<%= item.snippet.thumbnails.high.url %>" alt="News">
+            <span class="source-badge">LIVE</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title"><%= item.snippet.title %></div>
+            <p class="card-description"><%= item.snippet.description %></p>
+            <a href="/watch/<%= item.id.videoId %>" target="_blank" class="read-more">
+              ENTER STREAM <span>→</span>
+            </a>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  </main>
+
+</body>
+</html>
