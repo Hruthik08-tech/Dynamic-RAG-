@@ -10,8 +10,7 @@ import React, { useState, useEffect, useRef} from 'react';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 // Import environment variables 
-import dotenv from 'dotenv';
-dotenv.config();
+
 
 function App() {
 
